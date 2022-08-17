@@ -1,5 +1,13 @@
+import GlobalStyles from "globalStyles";
+import Suggestions from "pages/suggestions";
+
 function App() {
-  return <div>Matuś</div>;
+  return (
+    <>
+      <GlobalStyles />
+      <Suggestions />
+    </>
+  );
 }
 
 export default App;
