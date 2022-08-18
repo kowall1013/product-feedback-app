@@ -1,9 +1,14 @@
+import Icon from "components/icon";
 import styled from "styled-components";
+import { ICON_TYPE, FONT_WEIGHT, COLORS } from "utils/constant";
 
 const HeaderStyled = styled.header`
   height: 72px;
-  display: grid;
+  display: flex;
   align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+
   background-image: linear-gradient(
     70deg,
     hsl(201deg 85% 54%) 0%,
@@ -20,8 +25,34 @@ const HeaderStyled = styled.header`
   );
 `;
 
+const TitleWrapper = styled.div`
+  h1 {
+    font-size: 1.5rem;
+    line-height: 21.68px;
+    letter-spacing: -0.19px;
+    font-weight: ${FONT_WEIGHT.fw_700};
+    color: ${COLORS.white};
+  }
+
+  span {
+    font-size: 1.3rem;
+    line-height: 18.79px;
+    font-weight: ${FONT_WEIGHT.fw_500};
+    color: ${COLORS.white};
+    opacity: 0.75;
+  }
+`;
+
 function Header(): JSX.Element {
-  return <HeaderStyled>Header</HeaderStyled>;
+  return (
+    <HeaderStyled>
+      <TitleWrapper>
+        <h1>Frontend Mentor</h1>
+        <span>Feedback Board</span>
+      </TitleWrapper>
+      <Icon type={ICON_TYPE.hamburger} />
+    </HeaderStyled>
+  );
 }
 
 export default Header;

@@ -26,3 +26,8 @@ export const COLORS = {
   WhiteDarker: "hsla(231, 100%, 97%)",
   orange: "hsla(14, 83%, 74%)",
 };
+
+export const ICON_TYPE = {
+  hamburger: "HAMBURGER",
+  close: "ClOSE",
+};
