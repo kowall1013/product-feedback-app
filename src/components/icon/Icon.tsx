@@ -2,8 +2,9 @@ import { useCallback } from "react";
 import styled from "styled-components";
 import { ICON_TYPE } from "utils/constant";
 
-const IconWrapper = styled.div`
+const IconWrapper = styled.span`
   position: relative;
+
   &::after {
     --tap-increment: -16px;
     content: "";

@@ -22,6 +22,7 @@ export const COLORS = {
   darkLight: "hsla(231, 33%, 34%)",
   gray: "hsla(224, 20%, 49%)",
   white: "hsla(0, 0%, 100%)",
+  black: "hsla(0, 0%, 0%)",
   whiteDark: "hsla(230, 60%, 98%)",
   WhiteDarker: "hsla(231, 100%, 97%)",
   orange: "hsla(14, 83%, 74%)",
@@ -30,4 +31,12 @@ export const COLORS = {
 export const ICON_TYPE = {
   hamburger: "HAMBURGER",
   close: "ClOSE",
+};
+
+export const CONSTANT_VARIABLES = {
+  headerHeight: "72px",
+};
+
+export const Z_INDEX = {
+  header: "1",
 };

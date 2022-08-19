@@ -1,9 +1,20 @@
-import Icon from "components/icon";
+import { useState } from "react";
 import styled from "styled-components";
-import { ICON_TYPE, FONT_WEIGHT, COLORS } from "utils/constant";
+
+import Icon from "components/icon";
+import Drawer from "components/drawer";
+import {
+  ICON_TYPE,
+  FONT_WEIGHT,
+  COLORS,
+  CONSTANT_VARIABLES,
+  Z_INDEX,
+} from "utils/constant";
 
 const HeaderStyled = styled.header`
-  height: 72px;
+  position: relative;
+  z-index: ${Z_INDEX.header};
+  height: ${CONSTANT_VARIABLES.headerHeight};
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -44,14 +55,24 @@ const TitleWrapper = styled.div`
 `;
 
 function Header(): JSX.Element {
+  const [isOpen, setIsOpen] = useState(false);
   return (
-    <HeaderStyled>
-      <TitleWrapper>
-        <h1>Frontend Mentor</h1>
-        <span>Feedback Board</span>
-      </TitleWrapper>
-      <Icon type={ICON_TYPE.hamburger} />
-    </HeaderStyled>
+    <>
+      <HeaderStyled>
+        <TitleWrapper>
+          <h1>Frontend Mentor</h1>
+          <span>Feedback Board</span>
+        </TitleWrapper>
+        <div onClick={() => setIsOpen(!isOpen)}>
+          {isOpen ? (
+            <Icon type={ICON_TYPE.close} />
+          ) : (
+            <Icon type={ICON_TYPE.hamburger} />
+          )}
+        </div>
+      </HeaderStyled>
+      <Drawer />
+    </>
   );
 }
 
