@@ -71,7 +71,9 @@ function Header(): JSX.Element {
           )}
         </div>
       </HeaderStyled>
-      <Drawer />
+      <Drawer isOpen={isOpen} onClose={() => setIsOpen(false)}>
+        <p>The drawer content!</p>
+      </Drawer>
     </>
   );
 }

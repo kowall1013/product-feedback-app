@@ -2,6 +2,10 @@ import { COLORS } from "utils/constant";
 import { createGlobalStyle } from "styled-components";
 
 const GlobalStyles = createGlobalStyle`
+:root {  
+	--transition-speed: 0.3s;
+}
+
 *, *::before, *::after {
   box-sizing: border-box;
 }
