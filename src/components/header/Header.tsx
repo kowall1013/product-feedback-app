@@ -1,6 +1,7 @@
+//External
 import { useState } from "react";
 import styled from "styled-components";
-
+//Components
 import Icon from "components/icon";
 import Drawer from "components/drawer";
 import {
@@ -56,6 +57,7 @@ const TitleWrapper = styled.div`
 
 function Header(): JSX.Element {
   const [isOpen, setIsOpen] = useState(false);
+
   return (
     <>
       <HeaderStyled>
@@ -72,7 +74,11 @@ function Header(): JSX.Element {
         </div>
       </HeaderStyled>
       <Drawer isOpen={isOpen} onClose={() => setIsOpen(false)}>
-        <p>The drawer content!</p>
+        <div>
+          <button>Close</button>
+          <p>The drawer content!</p>
+          <input type="text" />
+        </div>
       </Drawer>
     </>
   );

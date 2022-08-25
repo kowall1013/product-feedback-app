@@ -97,6 +97,22 @@ function Drawer({
   );
 
   useEffect(() => {
+    const onKeyPress = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        onClose();
+      }
+    };
+
+    if (isOpen) {
+      window.addEventListener("keyup", onKeyPress);
+    }
+
+    return () => {
+      window.removeEventListener("keyup", onKeyPress);
+    };
+  }, [isOpen, onClose]);
+
+  useEffect(() => {
     if (bodyRef.current && portalRootRef.current) {
       bodyRef.current.appendChild(portalRootRef.current);
       const portal = portalRootRef.current;
