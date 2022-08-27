@@ -15,7 +15,7 @@ export const FONT_WEIGHT = {
 };
 
 export const COLORS = {
-  violet: "hsla(282, 31%, 234%)",
+  violet: "hsla(282, 83%, 52%)",
   blue: "hsla(230, 76%, 59%)",
   blutLight: "hsla(204, 94%, 68%)",
   dark: "hsla(230, 31%, 31%)",
@@ -31,6 +31,7 @@ export const COLORS = {
 export const ICON_TYPE = {
   hamburger: "HAMBURGER",
   close: "ClOSE",
+  plus: "PLUS",
 };
 
 export const CONSTANT_VARIABLES = {

@@ -1,6 +1,8 @@
 import Button from "components/Button";
+import DropdownMenu from "components/DropdownMenu";
+import Icon from "components/Icon";
 import styled from "styled-components";
-import { COLORS } from "utils/constant";
+import { COLORS, ICON_TYPE } from "utils/constant";
 
 const Wrapper = styled.div`
   display: flex;
@@ -9,13 +11,22 @@ const Wrapper = styled.div`
   background-color: ${COLORS.dark};
 `;
 
+const ContentButton = styled.span`
+  display: flex;
+  align-items: center;
+  gap: 4px;
+`;
+
 function NavbarExtension(): JSX.Element {
   return (
     <Wrapper>
-      <div>
-        <span>Sort by: </span>
-      </div>
-      <Button>Add Feedback</Button>
+      <DropdownMenu />
+      <Button>
+        <ContentButton>
+          <Icon type={ICON_TYPE.plus} />
+          Add Feedback
+        </ContentButton>
+      </Button>
     </Wrapper>
   );
 }
