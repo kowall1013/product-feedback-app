@@ -1,6 +1,7 @@
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import styled, { css } from "styled-components";
-import { COLORS, FONT_WEIGHT } from "utils/constant";
+import { COLORS } from "utils/constant";
+import { useOutsideClick } from "hooks/useOutsideClick";
 import Button from "./Button";
 
 const MenuContainer = styled.div`
@@ -17,13 +18,18 @@ const Nav = styled.nav<NavProps>`
   border-radius: 10px;
   position: absolute;
   top: 60px;
-  right: 0;
-  width: 300px;
+  left: 8px;
+  transform: translateY(-20px);
+  border: none;
+  width: 255px;
   box-shadow: 0 1px 8px rgba(0, 0, 0, 0.3);
   opacity: 0;
   visibility: hidden;
-  transform: translateY(-20px);
   transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s;
+
+  &:foucs {
+    outline: none;
+  }
 
   ${({ active }) =>
     active &&
@@ -40,11 +46,16 @@ const Nav = styled.nav<NavProps>`
 `;
 
 function DropdownMenu(): JSX.Element {
-  const dropdownRef = useRef(null);
-  const [isActive, setIsActive] = useState(false);
+  const dropdownRef = useRef<HTMLElement>(null);
+
+  const onClick = () => setIsActive(!isActive);
+
+  const [isActive, setIsActive] = useOutsideClick(dropdownRef, false);
+
   return (
     <MenuContainer>
-      <Button>Sort by: Most Upvotes</Button>
+      <Button onClick={onClick}>Sort by: Most Upvotes</Button>
+
       <Nav ref={dropdownRef} active={isActive}>
         <ul>
           <li>Most Upvotes</li>

@@ -44,15 +44,17 @@ type ButtonProps = {
   children: React.ReactNode;
   width?: string;
   variant?: "violet" | "blue" | "dark" | "orange";
+  onClick?: () => void;
 };
 
 function Button({
   children,
   width = "auto",
   variant = "violet",
+  onClick,
 }: ButtonProps): JSX.Element {
   return (
-    <ButtonStyled width={width} bgc={ButtonVariant[variant]}>
+    <ButtonStyled width={width} bgc={ButtonVariant[variant]} onClick={onClick}>
       {children}
     </ButtonStyled>
   );
