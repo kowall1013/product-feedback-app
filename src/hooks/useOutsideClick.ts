@@ -1,31 +1,31 @@
-import { useState, useEffect } from "react";
+import { useEffect, RefObject } from "react";
 
-/**
- * Hook for handling closing when clicking outside of an element
- * @param {React.node} el
- * @param {boolean} initialState
- */
-export const useOutsideClick = (el, initialState) => {
-  const [isActive, setIsActive] = useState(initialState);
+type Callback = () => void;
 
+function useOutsideClick(
+  ref: RefObject<HTMLElement>,
+  refHandle: RefObject<HTMLElement>,
+  callback: Callback
+): void {
   useEffect(() => {
-    const onClick = (e) => {
-      console.log("el", el.current);
-      console.log(!el.current.contains(e.target));
-      if (el.current !== null && !el.current.contains(e.target)) {
-        setIsActive(!isActive);
+    console.log();
+    function handleClick(e: MouseEvent): void {
+      if (
+        ref.current &&
+        !ref.current.contains(e.target as Node) &&
+        !refHandle.current?.contains(e.target as Node)
+      ) {
+        console.log("odpalam");
+        callback();
       }
-    };
-
-    // If the item is active (ie open) then listen for clicks outside
-    if (isActive) {
-      window.addEventListener("click", onClick);
     }
 
-    return () => {
-      window.removeEventListener("click", onClick);
-    };
-  }, [isActive, el]);
+    document.addEventListener("click", handleClick);
 
-  return [isActive, setIsActive];
-};
+    return () => {
+      document.removeEventListener("click", handleClick);
+    };
+  }, [ref, callback]);
+}
+
+export default useOutsideClick;

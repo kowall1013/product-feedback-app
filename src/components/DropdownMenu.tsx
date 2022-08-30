@@ -1,7 +1,7 @@
-import { useRef } from "react";
+import { useRef, useState, useCallback } from "react";
 import styled, { css } from "styled-components";
 import { COLORS } from "utils/constant";
-import { useOutsideClick } from "hooks/useOutsideClick";
+import useOutsideClick from "hooks/useOutsideClick";
 import Button from "./Button";
 
 const MenuContainer = styled.div`
@@ -47,15 +47,21 @@ const Nav = styled.nav<NavProps>`
 
 function DropdownMenu(): JSX.Element {
   const dropdownRef = useRef<HTMLElement>(null);
+  const handlerRef = useRef<HTMLButtonElement>(null);
+  const [isActive, setIsActive] = useState(false);
 
   const onClick = () => setIsActive(!isActive);
+  const onOutsideClick = useCallback(() => {
+    setIsActive(false);
+  }, []);
 
-  const [isActive, setIsActive] = useOutsideClick(dropdownRef, false);
+  useOutsideClick(dropdownRef, handlerRef, onOutsideClick);
 
   return (
     <MenuContainer>
-      <Button onClick={onClick}>Sort by: Most Upvotes</Button>
-
+      <button ref={handlerRef} onClick={onClick}>
+        Sort by: Most Upvotes
+      </button>
       <Nav ref={dropdownRef} active={isActive}>
         <ul>
           <li>Most Upvotes</li>
