@@ -1,11 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
+import sugestionsFeedbackSlice from "pages/suggestions/SugestionsSlice";
+
+console.log("jestem");
 
 export const store = configureStore({
   reducer: {
-    posts: postsReducer,
-    comments: commentsReducer,
-    users: usersReducer,
+    feedbackList: sugestionsFeedbackSlice,
   },
+  devTools: true,
 });
 
 export type RootState = ReturnType<typeof store.getState>;

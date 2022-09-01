@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
-import type { RootState } from "redux/store";
+import type { RootState } from "reduxState/store";
 
 import Data from "store/data.json";
 
@@ -20,7 +20,7 @@ interface Comment {
   id: number;
   content: string;
   user: User;
-  replies?: Replies | any;
+  replies?: Replies[];
 }
 
 interface Feedback {
@@ -30,7 +30,7 @@ interface Feedback {
   upvotes: number;
   status: string;
   description: string;
-  comments: Comment[];
+  comments?: Comment[];
 }
 
 interface FeedbackListState {
@@ -43,13 +43,10 @@ const initialState: FeedbackListState = {
   productRequests: Data.productRequests,
 };
 
-export const sugestionsFeedbackSlice = createSlice({
-  name: "counter",
+const sugestionsFeedbackSlice = createSlice({
+  name: "feedbackList",
   initialState,
   reducers: {},
 });
-
-// Other code such as selectors can use the imported `RootState` type
-export const selectCount = (state: RootState) => state.comments;
 
 export default sugestionsFeedbackSlice.reducer;
