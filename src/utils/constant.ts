@@ -10,6 +10,7 @@ export const QUERIES = {
 
 export const FONT_WEIGHT = {
   fw_500: 500,
+  fw_600: 600,
   fw_700: 700,
   fw_800: 800,
 };
