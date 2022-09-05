@@ -49,6 +49,18 @@ function Icon({
             />
           </svg>
         );
+      case ICON_TYPE.arrow_up:
+        return (
+          <svg width={width} height={height} xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M1 6l4-4 4 4"
+              stroke="#4661E6"
+              strokeWidth="2"
+              fill={color}
+              fillRule="evenodd"
+            />
+          </svg>
+        );
       case ICON_TYPE.plus:
         return (
           <svg width="9" height="9" xmlns="http://www.w3.org/2000/svg">

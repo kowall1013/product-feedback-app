@@ -10,7 +10,7 @@ const FilteredCardStyled = styled.div`
   border-radius: 10px;
   font-weight: ${FONT_WEIGHT.fw_600};
   font-size: 1.3rem;
-  color: ${COLORS.violet};
+  color: ${COLORS.blue};
   background-color: ${COLORS.WhiteDarker};
 `;
 

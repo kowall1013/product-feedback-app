@@ -33,6 +33,7 @@ export const ICON_TYPE = {
   hamburger: "HAMBURGER",
   close: "ClOSE",
   plus: "PLUS",
+  arrow_up: "ARROW_UP",
 };
 
 export const CONSTANT_VARIABLES = {
