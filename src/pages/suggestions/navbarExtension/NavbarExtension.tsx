@@ -7,8 +7,10 @@ import { COLORS, ICON_TYPE } from "utils/constant";
 const Wrapper = styled.div`
   display: flex;
   align-items: center;
+  justify-content: space-between;
   height: 56px;
   background-color: ${COLORS.dark};
+  padding: 0 24px;
 `;
 
 const ContentButton = styled.span`
