@@ -17,13 +17,14 @@ type DrawerStyledProps = {
 };
 
 const DrawerStyled = styled.div<DrawerStyledProps>`
-	background-color: ${COLORS.white};
+	background-color: ${COLORS.whiteDark};
 	width: 271px;
 	height: 100%;
 	overflow: auto;
 	position: fixed;
 	box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
 	transition: transform var(--transition-speed) ease;
+	padding: 2.4rem;
 	z-index: 1000;
 	top: ${CONSTANT_VARIABLES.headerHeight};
 	${({ position }) =>
@@ -53,8 +54,7 @@ const Backdrop = styled.div<BackdropProps>`
 	visibility: hidden;
 	opacity: 0;
 	background-color: rgba(0, 0, 0, 0.5);
-	transition: opacity var(--transition-speed) ease,
-		visibility var(--transition-speed) ease;
+	transition: opacity var(--transition-speed) ease, visibility var(--transition-speed) ease;
 	width: 100%;
 	height: 100%;
 	top: ${CONSTANT_VARIABLES.headerHeight};
@@ -85,16 +85,9 @@ function createPortalRoot() {
 	return drawerRoot;
 }
 
-function Drawer({
-	isOpen,
-	children,
-	onClose,
-	position = "right",
-}: DrawerProps): JSX.Element {
+function Drawer({ isOpen, children, onClose, position = "right" }: DrawerProps): JSX.Element {
 	const bodyRef = useRef(document.querySelector("body"));
-	const portalRootRef = useRef(
-		document.getElementById("drawer-root") || createPortalRoot()
-	);
+	const portalRootRef = useRef(document.getElementById("drawer-root") || createPortalRoot());
 
 	useEffect(() => {
 		const onKeyPress = (e: KeyboardEvent) => {

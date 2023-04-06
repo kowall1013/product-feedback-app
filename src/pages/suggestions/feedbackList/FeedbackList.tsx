@@ -1,122 +1,133 @@
-import FilteredCard from "components/FilteredCard";
-import Icon from "components/Icon";
-import { capitalize } from "helpers/strings.helper";
-import { useAppSelector } from "hooks/useAppSelector";
+//External
 import styled from "styled-components";
-import { COLORS, FONT_WEIGHT, ICON_TYPE } from "utils/constant";
+//Components
+import Icon from "components/Icon";
+import Tag from "components/Tag";
+import { Paragraph } from "components/typography";
+import { Card } from "components/Card";
+//Hooks
+import { useAppSelector } from "hooks/useAppSelector";
+//Helpers / Constat
+import { capitalize } from "helpers/strings.helper";
+import { COLORS, FONT_WEIGHT, ICON_TYPE, QUERIES } from "utils/constant";
 
 const Wrapper = styled.div`
-  background-color: ${COLORS.whiteDark};
-  padding: 32px 24px 55px 24px;
+	padding: 32px 24px 55px 24px;
+	display: flex;
+	justify-content: center;
+
+	@media ${QUERIES.tabletAndUp} {
+		padding: 0;
+	}
 `;
-const SuggestionsList = styled.ul`
-  display: flex;
-  flex-direction: column;
-  row-gap: 16px;
+const List = styled.ul`
+	display: flex;
+	flex: 1 1 0px;
+	flex-direction: column;
+	row-gap: 16px;
+	max-width: 327px;
+
+	@media ${QUERIES.tabletAndUp} {
+		max-width: none;
+	}
 `;
-const SuggestionItem = styled.li`
-  background-color: ${COLORS.white};
-  padding: 24px;
-  border-radius: 10px;
-`;
-const Title = styled.span`
-  display: block;
-  color: ${COLORS.darkLight};
-  font-weight: ${FONT_WEIGHT.fw_700};
-  font-size: 1.3rem;
-  line-height: 18.79px;
-  letter-spacing: -0.18px;
-  margin-bottom: 9px;
-`;
-const Description = styled.p`
-  font-size: 1.3rem;
-  line-height: 18.79px;
-  margin-bottom: 8px;
+const ListItem = styled.li`
+	display: grid;
+	align-items: center;
+	gap: 1.6rem;
+	grid-template-areas:
+		"content content"
+		"likes comments";
+
+	@media ${QUERIES.tabletAndUp} {
+		grid-template-columns: auto 1fr auto;
+		grid-template-areas: "likes content comments";
+		gap: 4rem;
+	}
 `;
 
-const Details = styled.div`
-  margin-top: 16px;
-  display: flex;
-  justify-content: space-between;
+const ContentWrapper = styled.div`
+	grid-area: content;
+	margin-bottom: 1.6rem;
+
+	h2 {
+		font-size: 1.3rem;
+		font-weight: ${FONT_WEIGHT.fw_700};
+		color: ${COLORS.darkLight};
+		margin-bottom: 0.8rem;
+
+		@media ${QUERIES.tabletAndUp} {
+			font-size: 1.8rem;
+		}
+	}
 `;
 
-const FilteredCardContent = styled.span`
-  display: flex;
-  align-items: center;
-  column-gap: 10px;
+const StyledTag = styled(Tag)`
+	grid-area: likes;
+	justify-self: flex-start;
+	transform: translateY(-50%);
 
-  span {
-    color: ${COLORS.darkLight};
-    font-weight: ${FONT_WEIGHT.fw_700};
-    font-size: 1.3rem;
-  }
+	div {
+		display: flex;
+		align-items: center;
+		gap: 0.8rem;
+
+		@media ${QUERIES.tabletAndUp} {
+			flex-direction: column;
+		}
+	}
 `;
 
 const CommentsWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  column-gap: 4px;
+	display: flex;
+	align-items: center;
+	column-gap: 4px;
+	grid-area: comments;
+	justify-self: flex-end;
 
-  span {
-    color: ${COLORS.darkLight};
-    font-weight: ${FONT_WEIGHT.fw_700};
-    font-size: 1.3rem;
-  }
+	span {
+		color: ${COLORS.darkLight};
+		font-weight: ${FONT_WEIGHT.fw_700};
+		font-size: 1.3rem;
+
+		@media ${QUERIES.tabletAndUp} {
+			font-size: 1.6rem;
+		}
+	}
 `;
 
 function FeedbackList(): JSX.Element {
-  const suggestions = useAppSelector((state) =>
-    state.feedbackList.productRequests.filter(
-      (suggestion) => suggestion.status === "suggestion"
-    )
-  );
+	const suggestions = useAppSelector((state) => state.feedbackList.productRequests.filter((suggestion) => suggestion.status === "suggestion"));
 
-  console.log(suggestions);
-  return (
-    <Wrapper>
-      <SuggestionsList>
-        {suggestions.map((suggestion) => (
-          <SuggestionItem>
-            <Title>{suggestion.title}</Title>
-            <Description>{suggestion.description}</Description>
-            <FilteredCard>{capitalize(suggestion.category)}</FilteredCard>
-            <Details>
-              <FilteredCard>
-                <FilteredCardContent>
-                  <svg width="10" height="7" xmlns="http://www.w3.org/2000/svg">
-                    <path
-                      d="M1 6l4-4 4 4"
-                      stroke="#4661E6"
-                      stroke-width="2"
-                      fill="none"
-                      fill-rule="evenodd"
-                    />
-                  </svg>
-                  <span>{suggestion.upvotes}</span>
-                </FilteredCardContent>
-              </FilteredCard>
-              {suggestion?.comments ? (
-                <CommentsWrapper>
-                  <svg
-                    width="18"
-                    height="16"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M2.62 16H1.346l.902-.91c.486-.491.79-1.13.872-1.823C1.036 11.887 0 9.89 0 7.794 0 3.928 3.52 0 9.03 0 14.87 0 18 3.615 18 7.455c0 3.866-3.164 7.478-8.97 7.478-1.017 0-2.078-.137-3.025-.388A4.705 4.705 0 012.62 16z"
-                      fill="#CDD2EE"
-                      fill-rule="nonzero"
-                    />
-                  </svg>
-                  <span>{suggestion.comments?.length}</span>
-                </CommentsWrapper>
-              ) : null}
-            </Details>
-          </SuggestionItem>
-        ))}
-      </SuggestionsList>
-    </Wrapper>
-  );
+	return (
+		<Wrapper>
+			<List>
+				{suggestions.map((suggestion) => (
+					<Card key={suggestion.id}>
+						<ListItem key={suggestion.id}>
+							<ContentWrapper>
+								<h2>{suggestion.title}</h2>
+								<Paragraph>{suggestion.description}</Paragraph>
+								<Tag>{capitalize(suggestion.category)}</Tag>
+							</ContentWrapper>
+
+							<StyledTag>
+								<div>
+									<Icon type={ICON_TYPE.upvotes} />
+									<span>{suggestion.upvotes}</span>
+								</div>
+							</StyledTag>
+
+							<CommentsWrapper>
+								<Icon type={ICON_TYPE.comments} />
+								<span>{suggestion.comments?.length ? suggestion.comments?.length : 0}</span>
+							</CommentsWrapper>
+						</ListItem>
+					</Card>
+				))}
+			</List>
+		</Wrapper>
+	);
 }
 
 export default FeedbackList;

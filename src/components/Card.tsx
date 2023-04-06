@@ -4,6 +4,7 @@ const CardWrapper = styled.div`
 	background-color: ${COLORS.white};
 	padding: 24px;
 	border-radius: 10px;
+	width: 100%;
 `;
 
 interface Props {
