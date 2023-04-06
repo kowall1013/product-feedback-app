@@ -1,16 +1,19 @@
+//External
 import { Provider } from "react-redux";
-import GlobalStyles from "globalStyles";
+//Components
 import Suggestions from "pages/suggestions";
+//Redux
 import { store } from "reduxState/store";
+//Styles
+import GlobalStyles from "globalStyles";
 
 function App() {
-  console.log("store", store);
-  return (
-    <Provider store={store}>
-      <GlobalStyles />
-      <Suggestions />
-    </Provider>
-  );
+	return (
+		<Provider store={store}>
+			<GlobalStyles />
+			<Suggestions />
+		</Provider>
+	);
 }
 
 export default App;
